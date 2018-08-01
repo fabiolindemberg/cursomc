@@ -1,6 +1,7 @@
 package com.fabiolindemberg.cursomc;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fabiolindemberg.cursomc.domain.Categoria;
+import com.fabiolindemberg.cursomc.domain.Cidade;
+import com.fabiolindemberg.cursomc.domain.Estado;
 import com.fabiolindemberg.cursomc.domain.Produto;
 import com.fabiolindemberg.cursomc.repositories.CategoriaRepository;
+import com.fabiolindemberg.cursomc.repositories.CidadeRepository;
+import com.fabiolindemberg.cursomc.repositories.EstadoRepository;
 import com.fabiolindemberg.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -21,6 +26,12 @@ public class DemoApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ProdutoRepository produtoRepo;
+	
+	@Autowired
+	private EstadoRepository estadoRepo;
+	
+	@Autowired
+	private CidadeRepository cidadeRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -51,8 +62,17 @@ public class DemoApplication implements CommandLineRunner{
 
 		categorias.add(escritorio);
 		categorias.add(informatica);
+		
+		Estado est1 = new Estado(null, "Minas Gerais");
+		Estado est2 = new Estado(null, "São Paulo");
+		
+		Cidade c1 = new Cidade(null, "Uberlândia", est1);
+		Cidade c2 = new Cidade(null, "São Paulo", est2);
+		Cidade c3 = new Cidade(null, "Minas Gerais", est2);
 	
 		categoriaRepo.saveAll(categorias);
 		produtoRepo.saveAll(produtos);
+		estadoRepo.saveAll(Arrays.asList(est1, est2));
+		cidadeRepo.saveAll(Arrays.asList(c1,c2,c3));
 	}
 }
