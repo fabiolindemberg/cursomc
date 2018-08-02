@@ -5,7 +5,7 @@ public enum TipoCliente {
 	PESSOAFISICA(1, "Pessoa Física"),
 	PESSOAJURIDICA(2, "Pessoa Jurídica");
 	
-	private int cod;
+	private Integer cod;
 	private String descricao;
 	
 	private TipoCliente(int cod, String descricao) {
@@ -28,7 +28,7 @@ public enum TipoCliente {
 		}
 		
 		for(TipoCliente tipoCliente: TipoCliente.values()) {
-			if(tipoCliente.equals(cod)) {
+			if(tipoCliente.cod.equals(cod)) {
 				return tipoCliente;
 			}
 		}
