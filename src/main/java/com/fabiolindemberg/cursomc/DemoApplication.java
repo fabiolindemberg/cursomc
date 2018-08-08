@@ -15,6 +15,7 @@ import com.fabiolindemberg.cursomc.domain.Cidade;
 import com.fabiolindemberg.cursomc.domain.Cliente;
 import com.fabiolindemberg.cursomc.domain.Endereco;
 import com.fabiolindemberg.cursomc.domain.Estado;
+import com.fabiolindemberg.cursomc.domain.ItemPedido;
 import com.fabiolindemberg.cursomc.domain.Pagamento;
 import com.fabiolindemberg.cursomc.domain.PagamentoComBoleto;
 import com.fabiolindemberg.cursomc.domain.PagamentoComCartao;
@@ -27,6 +28,7 @@ import com.fabiolindemberg.cursomc.repositories.CidadeRepository;
 import com.fabiolindemberg.cursomc.repositories.ClienteRepository;
 import com.fabiolindemberg.cursomc.repositories.EnderecoRepository;
 import com.fabiolindemberg.cursomc.repositories.EstadoRepository;
+import com.fabiolindemberg.cursomc.repositories.ItemPedidoRepository;
 import com.fabiolindemberg.cursomc.repositories.PagamentoRepository;
 import com.fabiolindemberg.cursomc.repositories.PedidoRepository;
 import com.fabiolindemberg.cursomc.repositories.ProdutoRepository;
@@ -58,6 +60,9 @@ public class DemoApplication implements CommandLineRunner{
 	@Autowired
 	private PagamentoRepository pagamentoRepo;
 
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepo;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
@@ -115,6 +120,18 @@ public class DemoApplication implements CommandLineRunner{
 		ped2.setPagamento(pagto2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
+		ped2.getItens().add(ip3);
+		
+		p1.getItens().add(ip1);
+		p2.getItens().add(ip3);
+		p3.getItens().add(ip2);
+		
 		categoriaRepo.saveAll(categorias);
 		produtoRepo.saveAll(produtos);
 		estadoRepo.saveAll(Arrays.asList(est1, est2));
@@ -123,7 +140,7 @@ public class DemoApplication implements CommandLineRunner{
 		enderecoRepo.saveAll(Arrays.asList(end1, end2));
 		pedidoRepo.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepo.saveAll(Arrays.asList(pagto1, pagto2));
-		
+		itemPedidoRepo.saveAll(Arrays.asList(ip1, ip2, ip3));		
 
 	}
 }

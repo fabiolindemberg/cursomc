@@ -9,11 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-<<<<<<< HEAD
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-=======
->>>>>>> parent of f63200a... End-point /cliente/id disponível
 @Entity
 public class Cidade implements Serializable{
 
