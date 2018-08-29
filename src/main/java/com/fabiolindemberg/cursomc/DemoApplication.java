@@ -75,6 +75,21 @@ public class DemoApplication implements CommandLineRunner{
 		
 		List<Categoria> categorias = new ArrayList<>();
 		
+		categorias.add(new Categoria(null, "Cama, mesa e banho"));
+		categorias.add(new Categoria(null, "Eletrônicos"));
+		categorias.add(new Categoria(null, "Jardinagem"));
+		categorias.add(new Categoria(null, "Decoração"));
+		categorias.add(new Categoria(null, "Perfumaria"));
+		categorias.add(new Categoria(null, "Cozinha"));
+		categorias.add(new Categoria(null, "Estar"));
+		categorias.add(new Categoria(null, "Banheiros"));
+		categorias.add(new Categoria(null, "Celulares"));
+		categorias.add(new Categoria(null, "Bijouterias"));
+		categorias.add(new Categoria(null, "Tecidos"));
+		categorias.add(new Categoria(null, "Miudezas"));
+		categorias.add(new Categoria(null, "Decoração"));
+		categorias.add(new Categoria(null, "Moveis"));
+		
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
