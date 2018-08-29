@@ -2,11 +2,14 @@ package com.fabiolindemberg.cursomc.services;
 
 import java.util.Optional;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.fabiolindemberg.cursomc.domain.Categoria;
 import com.fabiolindemberg.cursomc.repositories.CategoriaRepository;
+import com.fabiolindemberg.cursomc.services.exceptions.DataIntegrityException;
 import com.fabiolindemberg.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -33,8 +36,13 @@ public class CategoriaService {
 
 	public void delete(Integer id) {
 		find(id);
-		repo.deleteById(id);
-		
+		try
+		{
+			repo.deleteById(id);
+		}
+		catch(DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possível excluir uma categoria que possua produtos!");
+		}
 	}
 	
 }
