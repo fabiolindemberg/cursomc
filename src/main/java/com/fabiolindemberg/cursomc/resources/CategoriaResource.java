@@ -28,6 +28,14 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 	
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+		
+		Categoria cat1 = service.find(id);
+		
+		return ResponseEntity.ok().body(cat1);
+	}
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		
@@ -47,14 +55,6 @@ public class CategoriaResource {
 		Page<Categoria> categorias = service.findPage(page, linesPerPage, direction, orderBy);
 		Page<CategoriaDTO> categoriasDto = categorias.map(categoria -> new CategoriaDTO(categoria));
 		return ResponseEntity.ok().body(categoriasDto);
-	}
-	
-	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
-		
-		Categoria cat1 = service.find(id);
-		
-		return ResponseEntity.ok().body(cat1);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
