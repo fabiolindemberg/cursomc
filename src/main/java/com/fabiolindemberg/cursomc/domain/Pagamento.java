@@ -32,9 +32,9 @@ public abstract class Pagamento {
 	public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
 		super();
 		this.id = id;
-		this.estado = estado.getCod();
+		this.estado = (estado == null) ? null : estado.getCod();
 		this.setPedido(pedido);
-	}
+	}	
 
 	public Integer getId() {
 		return id;
